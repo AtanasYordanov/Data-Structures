@@ -1,11 +1,8 @@
-import java.util.Arrays;
-
 public class CircularQueue<T> {
 
     private static final int DEFAULT_CAPACITY = 4;
     private T[] array;
     private int size;
-    private int capacity;
     private int startIndex;
     private int endIndex;
 
@@ -15,7 +12,6 @@ public class CircularQueue<T> {
 
     public CircularQueue(int initialCapacity) {
         this.array = (T[]) new Object[initialCapacity];
-        this.capacity = initialCapacity;
         this.size = 0;
         this.startIndex = 0;
         this.endIndex = 0;
@@ -39,12 +35,15 @@ public class CircularQueue<T> {
     }
 
     public T dequeue() {
-        if (this.size == 0){
+        if (this.size == 0) {
             throw new IllegalArgumentException();
         }
         T element = this.array[startIndex];
+        this.array[startIndex] = null;
         this.startIndex = (this.startIndex + 1) % this.array.length;
-        this.size--;
+        if (this.size-- < this.array.length / 3) {
+            this.resize();
+        }
         return element;
     }
 
@@ -54,9 +53,16 @@ public class CircularQueue<T> {
         return resultArray;
     }
 
+    private void resize() {
+        T[] newArray = (T[]) new Object[this.array.length / 2];
+        copyAllElements(newArray);
+        this.startIndex = 0;
+        this.endIndex = this.size;
+        this.array = newArray;
+    }
+
     private void grow() {
-        this.capacity *= 2;
-        T[] newArray = (T[]) new Object[capacity];
+        T[] newArray = (T[]) new Object[this.array.length * 2];
         copyAllElements(newArray);
         this.startIndex = 0;
         this.endIndex = this.size;
