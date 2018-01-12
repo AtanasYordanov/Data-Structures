@@ -54,21 +54,16 @@ public class LinkedList<T> implements Iterable<T> {
     }
 
     public T removeLast() {
-        if (this.size == 0)
-        {
+        if (this.size == 0) {
             throw new IllegalArgumentException();
         }
         T element = this.tail.value;
-        if (this.size == 1)
-        {
+        if (this.size == 1) {
             this.head = null;
             this.tail = null;
-        }
-        else
-        {
+        } else {
             Node current = this.head;
-            while (current.next != this.tail)
-            {
+            while (current.next != this.tail) {
                 current = current.next;
             }
             current.next = null;
@@ -83,11 +78,11 @@ public class LinkedList<T> implements Iterable<T> {
         return new LinkedListIterator();
     }
 
-    private class LinkedListIterator implements Iterator<T>{
+    private class LinkedListIterator implements Iterator<T> {
 
         private Node current;
 
-        private LinkedListIterator(){
+        private LinkedListIterator() {
             this.current = head;
         }
 
