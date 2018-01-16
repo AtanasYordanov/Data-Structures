@@ -14,7 +14,7 @@ public class CalculateSequence {
         queue.offer(n);
         int count = 0;
         StringBuilder sb = new StringBuilder();
-        while (!queue.isEmpty() && count < 50){
+        while (!queue.isEmpty() && count < 50) {
             int num = queue.poll();
             sb.append(num).append(", ");
             if (queue.size() + count < 50) {
@@ -24,7 +24,7 @@ public class CalculateSequence {
             }
             count++;
         }
-        sb.replace(sb.length()- 2 , sb.length(), "");
+        sb.replace(sb.length() - 2, sb.length(), "");
         System.out.println(sb.toString());
     }
 }

@@ -12,7 +12,7 @@ public class SequenceNM {
         String[] input = reader.readLine().split(" ");
         int n = Integer.parseInt(input[0]);
         int m = Integer.parseInt(input[1]);
-        if (n == m){
+        if (n == m) {
             System.out.println(n);
             return;
         }
@@ -22,18 +22,18 @@ public class SequenceNM {
         Item firstItem = new Item(n, null);
         Deque<Item> queue = new ArrayDeque<>();
         queue.offer(firstItem);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Item currentItem = queue.poll();
             int currentNum = currentItem.getValue();
             Item item = new Item(currentNum + 1, currentItem);
             Item item1 = new Item(currentNum + 2, currentItem);
             Item item2 = new Item(currentNum * 2, currentItem);
-            if (currentNum + 1 == m || currentNum +2 == m || currentNum * 2 == m){
-                if (currentNum + 1 == m){
+            if (currentNum + 1 == m || currentNum + 2 == m || currentNum * 2 == m) {
+                if (currentNum + 1 == m) {
                     printSolution(item);
-                }else if (currentNum + 2 == m){
+                } else if (currentNum + 2 == m) {
                     printSolution(item1);
-                }else{
+                } else {
                     printSolution(item2);
                 }
                 break;
@@ -46,19 +46,19 @@ public class SequenceNM {
 
     private static void printSolution(Item item) {
         Deque<Integer> stack = new ArrayDeque<>();
-        while (item != null){
+        while (item != null) {
             stack.push(item.getValue());
             item = item.getPrev();
         }
-        StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             System.out.print(stack.pop());
-            if (stack.size() > 0){
+            if (stack.size() > 0) {
                 System.out.print(" -> ");
             }
         }
     }
 }
+
 class Item {
     private int value;
     private Item prev;
