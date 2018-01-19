@@ -4,12 +4,18 @@ import java.util.function.Consumer;
 public class Tree<T> {
 
     private T value;
+    private Tree<T> parent;
     private List<Tree<T>> children;
 
     public Tree(T value, Tree<T>... children) {
         this.value = value;
         this.children = new ArrayList<>();
         this.children.addAll(Arrays.asList(children));
+    }
+
+    public void addChild(Tree<T> child) {
+        this.children.add(child);
+        child.setParent(this);
     }
 
     public String print(int indent, StringBuilder builder) {
@@ -54,5 +60,29 @@ public class Tree<T> {
             output.add(current.value);
         }
         return output;
+    }
+
+    public T getValue() {
+        return this.value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public List<Tree<T>> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Tree<T>> children) {
+        this.children = children;
+    }
+
+    public Tree<T> getParent() {
+        return parent;
+    }
+
+    public void setParent(Tree<T> parent) {
+        this.parent = parent;
     }
 }
