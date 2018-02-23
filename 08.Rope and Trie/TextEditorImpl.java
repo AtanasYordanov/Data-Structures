@@ -11,6 +11,10 @@ public class TextEditorImpl implements TextEditor {
         this.trie = new Trie<>();
     }
 
+    public boolean isLogged(String username){
+        return this.trie.contains(username);
+    }
+
     @Override
     public void login(String username) {
         if (this.loggedUsers.contains(username)){
@@ -22,8 +26,8 @@ public class TextEditorImpl implements TextEditor {
 
     @Override
     public void logout(String username) {
-        this.loggedUsers.remove(username);
         this.trie.insert(username, new ArrayDeque<>());
+        this.loggedUsers.remove(username);
     }
 
     @Override

@@ -5,11 +5,9 @@ public class Trie<Value> {
 
     public Value getValue(String key) {
         Node result = this.getNode(this.root, key, 0);
-
         if (result == null || !result.isTerminal()) {
             throw new IllegalArgumentException();
         }
-
         return result.getValue();
     }
 

@@ -13,9 +13,6 @@ public class Main {
                 case "login":
                     editor.login(tokens[1]);
                     break;
-                case "logout":
-                    editor.logout(tokens[1]);
-                    break;
                 case "users":
                     if (tokens.length > 1) {
                         for (String user : editor.users(tokens[1])) {
@@ -30,6 +27,9 @@ public class Main {
                 default:
                     String username = tokens[0];
                     switch (tokens[1]) {
+                        case "logout":
+                            editor.logout(username);
+                            break;
                         case "prepend":
                             StringBuilder prependSb = new StringBuilder();
                             for (int i = 2; i < tokens.length; i++) {
@@ -51,7 +51,9 @@ public class Main {
                             editor.insert(username, Integer.parseInt(tokens[2]), insertSb.toString());
                             break;
                         case "print":
-                            System.out.println(editor.print(username));
+                            if (editor.isLogged(username)) {
+                                System.out.println(editor.print(username));
+                            }
                             break;
                         case "clear":
                             editor.clear(username);
